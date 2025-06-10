@@ -28,3 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])
         ->name('reservations.show');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
