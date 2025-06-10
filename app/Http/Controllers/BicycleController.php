@@ -2,63 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bicycle;
+use App\Models\Hub;
 use Illuminate\Http\Request;
 
 class BicycleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $bicycles = Bicycle::with('hub')->get();
+        return view('bicycles.index', compact('bicycles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function forMaintenance()
     {
-        //
-    }
+        $dueForInspection = Bicycle::where('next_inspection_date', '<=', now())
+            ->orWhere('status', 'in_maintenance')
+            ->with('hub')
+            ->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('bicycles.maintenance', compact('dueForInspection'));
     }
 }

@@ -2,63 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bicycle;
+use App\Models\MaintenanceLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaintenanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function updateStatus(Request $request, Bicycle $bicycle)
     {
-        //
-    }
+        $request->validate([
+            'status' => 'required|in:available,in_maintenance',
+            'maintenance_notes' => 'nullable|string',
+            'next_inspection_date' => 'nullable|date'
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $bicycle->update([
+            'status' => $request->status,
+            'next_inspection_date' => $request->next_inspection_date ?? $bicycle->next_inspection_date
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($request->maintenance_notes) {
+            MaintenanceLog::create([
+                'bicycle_id' => $bicycle->id,
+                'staff_id' => Auth::id(),
+                'maintenance_type' => $request->status === 'available' ? 'inspection' : 'repair',
+                'description' => $request->maintenance_notes,
+                'completed_at' => now(),
+                'next_inspection_date' => $request->next_inspection_date
+            ]);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Bicycle status updated!');
     }
 }
