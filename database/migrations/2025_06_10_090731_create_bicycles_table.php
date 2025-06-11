@@ -6,21 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('bicycles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('hub_id')->constrained()->onDelete('cascade');
+            $table->string('identifier')->unique();
+            $table->enum('status', ['available', 'reserved', 'in_maintenance'])->default('available');
+            $table->dateTime('last_inspection_date');
+            $table->dateTime('next_inspection_date');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('bicycles');
     }
