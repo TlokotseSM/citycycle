@@ -24,8 +24,8 @@ Route::post('/bicycles/{bicycle}/maintenance', [MaintenanceController::class, 'u
 Route::middleware('auth')->group(function () {
     Route::get('/bicycles/{bicycle}/reserve', [ReservationController::class, 'create'])
         ->name('bicycles.reserve');
-    Route::post('/reservations', [ReservationController::class, 'store'])
-        ->name('reservations.store');
+    Route::post('/reservations/{bicycle}', [ReservationController::class, 'store'])
+    ->name('reservations.store');
     Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])
         ->name('reservations.show');
 });
