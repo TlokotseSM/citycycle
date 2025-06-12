@@ -21,25 +21,25 @@ class ReservationController extends Controller
      * Store a newly created reservation
      */
     public function store(Request $request, Bicycle $bicycle)
-    {
-        $request->validate([
-            'start_time' => 'required|date|after:now',
-            'end_time' => 'required|date|after:start_time',
-        ]);
+{
+    $request->validate([
+        'start_time' => 'required|date|after:now',
+        'end_time' => 'required|date|after:start_time',
+    ]);
 
-        $reservation = Reservation::create([
-            'user_id' => Auth::id(),
-            'bicycle_id' => $bicycle->id,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'status' => 'pending'
-        ]);
+    $reservation = Reservation::create([
+        'user_id' => Auth::id(),
+        'bicycle_id' => $bicycle->id,
+        'start_time' => $request->start_time,
+        'end_time' => $request->end_time,
+        'status' => 'pending'
+    ]);
 
-        $bicycle->update(['status' => 'reserved']);
+    $bicycle->update(['status' => 'reserved']);
 
-        return redirect()->route('reservations.show', $reservation)
-            ->with('success', 'Bicycle reserved successfully!');
-    }
+    return redirect()->route('reservations.show', $reservation)
+        ->with('success', 'Bicycle reserved successfully!');
+}
 
     /**
      * Display the specified reservation
