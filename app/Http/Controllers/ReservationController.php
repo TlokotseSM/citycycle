@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
+    /**
+     * Show the form for creating a new reservation
+     */
+    public function create(Bicycle $bicycle)
+    {
+        return view('reservations.create', compact('bicycle'));
+    }
+
+    /**
+     * Store a newly created reservation
+     */
     public function store(Request $request, Bicycle $bicycle)
     {
         $request->validate([
@@ -30,6 +41,9 @@ class ReservationController extends Controller
             ->with('success', 'Bicycle reserved successfully!');
     }
 
+    /**
+     * Display the specified reservation
+     */
     public function show(Reservation $reservation)
     {
         return view('reservations.show', compact('reservation'));
