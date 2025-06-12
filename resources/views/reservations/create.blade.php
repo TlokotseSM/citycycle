@@ -4,9 +4,8 @@
 <div class="container">
     <h1>Reserve Bicycle: {{ $bicycle->identifier }}</h1>
 
-    <form action="{{ route('reservations.store') }}" method="POST">
+    <form action="{{ route('reservations.store', ['bicycle' => $bicycle->id]) }}" method="POST">
         @csrf
-        <input type="hidden" name="bicycle_id" value="{{ $bicycle->id }}">
 
         <div class="form-group">
             <label for="start_time">Start Time</label>
