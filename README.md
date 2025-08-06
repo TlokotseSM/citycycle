@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="public/BicycleLogo.png" width="200" alt="CityCycle Logo" />
+  <img src="/BicycleLogo.png" width="200" alt="CityCycle Logo" />
+
 </p>
 
 <h1 align="center">CityCycle - Bike Sharing Platform</h1>
@@ -63,13 +64,6 @@
 
 ---
 
-## 📸 Screenshots
-
-| Hub Overview | Bike Reservation | Maintenance Dashboard |
-|-------------|-----------------|----------------------|
-| <img src="public/screenshots/hubs.png" width="300" alt="Hub Overview showing bike availability across locations"> | <img src="public/screenshots/reservation.png" width="300" alt="Bike reservation interface"> | <img src="public/screenshots/maintenance.png" width="300" alt="Maintenance tracking dashboard"> |
-
----
 
 ## 🛠 Tech Stack
 
@@ -161,7 +155,7 @@ For a containerized setup:
 
 ```bash
 # Clone and navigate to project
-git clone https://github.com/yourusername/citycycle.git
+git clone https://github.com/TlokotseSM/citycycle.git
 cd citycycle
 
 # Start with Docker Compose
@@ -397,7 +391,7 @@ This project is distributed under the MIT License. See `LICENSE` file for more i
 </p>
 
 <p align="center">
-  <a href="https://github.com/yourusername/citycycle">GitHub</a> • 
+  <a href="https://github.com/TlokotseSM/citycycle">GitHub</a> • 
   <a href="https://github.com/TlokotseSM/citycycle">Live Demo</a> • 
   <a href="https://laravel.com/">Documentation</a>
 </p>
