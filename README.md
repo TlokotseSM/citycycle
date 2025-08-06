@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="/BicycleLogo.png" width="200" alt="CityCycle Logo" />
-
+  <img src="public/BicycleLogo.png" width="200" alt="CityCycle Logo" />
 </p>
 
 <h1 align="center">CityCycle - Bike Sharing Platform</h1>
